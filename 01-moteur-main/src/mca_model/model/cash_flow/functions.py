@@ -1,6 +1,7 @@
 
 from mca_model import Model, Asset
 from mca_model.model import electricity
+from mca_model import opex
 
 # functions for operating_cf
 def cash_proceeds_account_BoP(*args):
@@ -40,9 +41,9 @@ def cash_pooling(*args):
     return 0
 
 
-def total_opex(*args):
+def total_opex(m: Model, a: Asset, **kwargs):
     """"""
-    return 0
+    return opex.get_price(m, a, **kwargs)
 
 
 def agency_fees(*args):
