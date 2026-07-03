@@ -1,0 +1,930 @@
+[dashboard]
+sensitivity = 2
+scenario = "lender"
+
+[model]
+t_start = 2025-01-01
+t_end = 2062-12-30
+inflation_start = 2026-01-01
+t_freq = "ME"
+
+[market]
+ipc_years = [
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    2032,
+    2033,
+    2034,
+    2035,
+    2036,
+    2037,
+    2038,
+    2039,
+    2040,
+    2041,
+    2042,
+    2043,
+    2044,
+    2045,
+    2046,
+    2047,
+    2048,
+    2049,
+    2050,
+    2051,
+    2052,
+    2053,
+    2054,
+    2055,
+    2056,
+    2057,
+    2058,
+    2059,
+    2060,
+    2061,
+    2062,
+    2063,
+    2064,
+    2065,
+    2066,
+    2067,
+    2068,
+    2069,
+    2070,
+    2071,
+    2072,
+    2073,
+    2074,
+    2075,
+    2076,
+]
+ipc_base_rate = [
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+]
+ipc_percentage = [
+    1.0,
+    0.2,
+    0.3,
+    0.4,
+]
+ipc_scenario = [
+    "IPC",
+    "20% IPC",
+    "30% IPC",
+    "40% IPC",
+]
+market_price_years = [
+    "2025",
+    "2026",
+    "2027",
+    "2028",
+    "2029",
+    "2030",
+    "2031",
+    "2032",
+    "2033",
+    "2034",
+    "2035",
+    "2036",
+    "2037",
+    "2038",
+    "2039",
+    "2040",
+    "2041",
+    "2042",
+    "2043",
+    "2044",
+    "2045",
+    "2046",
+    "2047",
+    "2048",
+    "2049",
+    "2050",
+    "2051",
+    "2052",
+    "2053",
+    "2054",
+    "2055",
+    "2056",
+    "2057",
+    "2058",
+    "2059",
+    "2060",
+    "2061",
+    "2062",
+    "2063",
+    "2064",
+    "2065",
+    "2066",
+    "2067",
+    "2068",
+    "2069",
+    "2070",
+    "2071",
+    "2072",
+    "2073",
+    "2074",
+    "2075",
+    "2076",
+]
+
+[market.market_price_scenario]
+"Flat price dashboard" = [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+]
+"Low captured" = [
+    37.11753224175,
+    30.4874459803425,
+    26.8398170798144,
+    28.690046492702,
+    33.5346842983452,
+    37.7756362924389,
+    41.9378664619778,
+    42.896446266823,
+    44.7321265931016,
+    46.4994122503044,
+    47.556557065003,
+    53.1768774454125,
+    53.0497717383478,
+    56.6746189843098,
+    60.6985169321958,
+    62.6144429088311,
+    64.0099307171579,
+    61.0543043860569,
+    61.0835169718876,
+    60.6335847249239,
+    62.4662690151058,
+    63.8736976073072,
+    65.7962326640024,
+    66.4541949906425,
+    65.6021337776436,
+    63.320320428856,
+    65.9831966068912,
+    67.302860539029,
+    67.7408632822195,
+    69.8366529934174,
+    69.9107502379727,
+    70.3453305772899,
+    71.7522371888357,
+    71.7836902243157,
+    70.7650836702947,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+    68.6339502256575,
+]
+"Mid captured" = [
+    58.23793086945,
+    45.5179700475743,
+    38.1407926923678,
+    39.1026502390881,
+    46.971140296672,
+    52.4021783934747,
+    57.9141965427312,
+    59.0724804735858,
+    61.4761193342352,
+    63.5782848462607,
+    63.8325979856458,
+    71.3348355975046,
+    68.9250151513198,
+    71.3830320064283,
+    75.2881831335852,
+    74.6880798822828,
+    76.6114383303792,
+    73.4696533640829,
+    72.4063152398473,
+    72.4867667012249,
+    72.5414736949616,
+    74.7828192283572,
+    76.1172103367871,
+    76.1591393085828,
+    76.3400789484088,
+    74.1018885018775,
+    76.1076024354618,
+    77.2736546929592,
+    77.0030188516382,
+    79.4692947856129,
+    80.869732707709,
+    83.2580350942171,
+    84.7266143243512,
+    84.8170418013563,
+    85.8998125477566,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+    87.4091949682386,
+]
+"30 €/MWh" = [
+    30.0,
+    30.6,
+    31.212,
+    31.83624,
+    32.4729648,
+    33.122424096,
+    33.78487257792,
+    34.4605700294784,
+    35.149781430068,
+    35.8527770586693,
+    36.5698325998427,
+    37.3012292518396,
+    38.0472538368764,
+    38.8081989136139,
+    39.5843628918862,
+    40.3760501497239,
+    41.1835711527184,
+    42.0072425757727,
+    42.8473874272882,
+    43.704335175834,
+    44.5784218793507,
+    45.4699903169377,
+    46.3793901232764,
+    47.306977925742,
+    48.2531174842568,
+    49.2181798339419,
+    50.2025434306208,
+    51.2065942992332,
+    52.2307261852178,
+    53.2753407089222,
+    54.3408475231006,
+    55.4276644735627,
+    56.5362177630339,
+    57.6669421182946,
+    58.8202809606605,
+    59.9966865798737,
+    61.1966203114712,
+    62.4205527177006,
+    63.6689637720546,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+    64.9423430474957,
+]
+"50 €/MWh" = [
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+]
+"Low non indexed" = [
+    43.6,
+    36.3,
+    30.96,
+    30.16,
+    32.51,
+    34.83,
+    37.19,
+    36.54,
+    36.3,
+    37.67,
+    39.14,
+    41.68,
+    42.69,
+    41.94,
+    41.91,
+    42.1,
+    43.3,
+    43.76,
+    43.39,
+    42.75,
+    41.05,
+    41.06,
+    40.6,
+    39.85,
+    39.01,
+    36.54,
+    37.28,
+    37.06,
+    36.3,
+    37.75,
+    37.5,
+    36.44,
+    35.92,
+    34.14,
+    33.74,
+    33.39,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+    32.9,
+]
+"70%Mid/30%Low" = [
+    51.90181128114,
+    41.0088128274048,
+    34.7505000086018,
+    35.9788691151723,
+    42.940203497174,
+    48.014215763164,
+    53.1212975185052,
+    54.219670211557,
+    56.4529215118951,
+    58.4546230674738,
+    58.949785709453,
+    65.887448151877,
+    64.1624421274282,
+    66.9705080997927,
+    70.9112832731684,
+    71.0659887902473,
+    72.8309860464128,
+    69.7450486706751,
+    69.0094757594594,
+    68.9308121083346,
+    69.5189122910049,
+    71.5100827420422,
+    73.0209170349517,
+    73.2476560132007,
+    73.1186953971792,
+    70.8674180799711,
+    73.0702806868906,
+    74.2824164467801,
+    74.2243721808126,
+    76.5795022479543,
+    77.5820379667881,
+    79.3842237391389,
+    80.8343011836965,
+    80.9070363282441,
+    81.359393884518,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+    81.7766215454643,
+]
+"80%Mid/20%Low" = [
+    54.01385114391,
+    42.5118652341279,
+    35.8805975698571,
+    37.0201294898109,
+    44.2838490970066,
+    49.4768699732675,
+    54.7189305265805,
+    55.8372736322332,
+    58.1273207860085,
+    60.1625103270694,
+    60.5773898015172,
+    67.7032439670862,
+    65.7499664687254,
+    68.4413494020046,
+    72.3702498933073,
+    72.2733524875925,
+    74.0911368077349,
+    70.9865835684777,
+    70.1417555862554,
+    70.1161303059647,
+    70.5264327589904,
+    72.6009949041472,
+    74.0530148022302,
+    74.2181504449948,
+    74.1924899142558,
+    71.9455748872732,
+    74.0827212697477,
+    75.2794958621732,
+    75.1505877377545,
+    77.5427664271738,
+    78.6779362137618,
+    80.6754941908317,
+    82.1317388972481,
+    82.2103714859482,
+    82.8728667722642,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+    83.6541460197224,
+]
+
+[vehicle.TopCo]
+type = "TopCo"
+opex = [
+    1.0,
+    "k€ / year",
+]
+opex_start_date = 2025-05-01
+opex_end_date = 2062-12-30
+opex_inflation = "20% IPC"
+
+[vehicle.Holdco_1]
+type = "Holdco"
+parent = "TopCo"
+opex = [
+    2.0,
+    "k€ / year",
+]
+opex_start_date = 2025-05-01
+opex_end_date = 2062-12-30
+opex_inflation = "20% IPC"
+
+[vehicle.Holdco_2]
+type = "Holdco"
+parent = "TopCo"
+opex = [
+    0.0,
+    "k€ / year",
+]
+opex_start_date = 2025-05-01
+opex_end_date = 2062-12-30
+opex_inflation = "40% IPC"
+
+[vehicle.SPV_1]
+type = "SPV"
+parent = "Holdco_1"
+opex = [
+    4.0,
+    "k€ / year",
+]
+opex_start_date = 2030-05-01
+opex_end_date = 2052-11-17
+opex_inflation = "20% IPC"
+
+[vehicle.SPV_1.assets.Actif_1]
+type = "Solar"
+typology = "BAT"
+master_activation = true
+construction_start = 2025-03-26
+construction_end = 2026-03-25
+merchant_pre_contract_start = 2026-03-26
+merchant_pre_contract_end = 2026-05-10
+merchant_post_contract_start = 2046-05-11
+merchant_post_contract_end = 2051-11-01
+operation_contract_start = 2026-05-11
+operation_contract_end = 2046-05-10
+installed_capacity = [
+    159.705,
+    "kWc",
+]
+revenues_inflation = "20% IPC"
+capacity_degradation_rate_lenders = 0.004
+capacity_degradation_rate_sponsor = 0.004
+capacity_degradation_start_date = 2026-03-26
+production_availability_lenders = 0.99
+production_availability_sponsor = 0.99
+yield_lenders = "P90"
+yield_sponsor = "P50"
+yield_portofolio_effect = 0.005
+yield_excl_capacity_p50 = 1370.0
+yield_excl_capacity_p90 = 1287.8
+self_consumption = false
+self_consumption_annual_fee = 42.0
+contracted_revenues_ref_tariff = [
+    115.09592893258,
+    "€ / MWh",
+]
+contracted_revenues_bonus_tariff = [
+    4.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_tariff = [
+    42.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_activation = true
+contracted_revenues_yield_threshold_activation = true
+revenues_merchant_price_scenario = "Mid captured"
+opex = 0
+local_taxes = 0
+contracted_revenues_yield_threshold = 1100
+contracted_revenues_yield_tariff_above_threshold = [
+    40,
+    "€ / MWh",
+]
+
+[[vehicle.SPV_1.assets.Actif_1.OPEX]]
+name = "OPEX €/MWh (period 1)"
+index_xls = 1
+price = [
+    1.0,
+    "€/MWh",
+]
+"start date" = 2026-03-26
+"end date" = 2051-11-01
+inflation = "IPC"
+
+[[vehicle.SPV_1.assets.Actif_1.OPEX]]
+name = "OPEX k€ /Year"
+index_xls = 3
+price = [
+    1.1935429111111109,
+    "k€/year",
+]
+"start date" = 2026-03-26
+"end date" = 2051-11-01
+inflation = "IPC"
+
+[vehicle.SPV_2]
+type = "SPV"
+parent = "Holdco_2"
+opex = [
+    5.0,
+    "k€ / year",
+]
+opex_start_date = 2030-05-01
+opex_end_date = 2052-11-17
+opex_inflation = "IPC"
+
+[vehicle.SPV_2.assets]
+
+[vehicle.SPV_3]
+type = "SPV"
+parent = "Holdco_1"
+opex = [
+    6.0,
+    "k€ / year",
+]
+opex_start_date = 2030-05-01
+opex_end_date = 2052-11-17
+opex_inflation = "20% IPC"
+
+[vehicle.SPV_3.assets.Actif_3]
+type = "Solar"
+typology = "BAT"
+master_activation = true
+construction_start = 2025-05-31
+construction_end = 2026-05-30
+merchant_pre_contract_start = 2026-05-31
+merchant_pre_contract_end = 2026-07-15
+merchant_post_contract_start = 2046-07-16
+merchant_post_contract_end = 2052-01-06
+operation_contract_start = 2026-07-16
+operation_contract_end = 2046-07-15
+installed_capacity = [
+    31.05,
+    "kWc",
+]
+revenues_inflation = "IPC"
+capacity_degradation_rate_lenders = 0.004
+capacity_degradation_rate_sponsor = 0.004
+capacity_degradation_start_date = 2026-05-31
+production_availability_lenders = 0.99
+production_availability_sponsor = 0.99
+yield_lenders = "P90"
+yield_sponsor = "P50"
+yield_portofolio_effect = 0.005
+yield_excl_capacity_p50 = 1171.0
+yield_excl_capacity_p90 = 1100.74
+self_consumption = false
+self_consumption_annual_fee = 54.0
+contracted_revenues_ref_tariff = [
+    124.285081042638,
+    "€ / MWh",
+]
+contracted_revenues_bonus_tariff = [
+    5.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_tariff = [
+    42.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_activation = false
+contracted_revenues_yield_threshold_activation = true
+revenues_merchant_price_scenario = "50 €/MWh"
+opex = 0
+local_taxes = 0
+contracted_revenues_yield_threshold = 1100
+contracted_revenues_yield_tariff_above_threshold = [
+    40,
+    "€ / MWh",
+]
+
+[[vehicle.SPV_3.assets.Actif_3.OPEX]]
+name = "OPEX €/MWh (period 1)"
+index_xls = 1
+price = [
+    2.0,
+    "€/MWh",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"
+
+[[vehicle.SPV_3.assets.Actif_3.OPEX]]
+name = "OPEX €/MWh (period 2)"
+index_xls = 2
+price = [
+    10.0,
+    "€/MWh",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"
+
+[[vehicle.SPV_3.assets.Actif_3.OPEX]]
+name = "OPEX k€ /Year"
+index_xls = 3
+price = [
+    0.479402111111111,
+    "k€/year",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"
+
+[vehicle.SPV_3.assets.Actif_4]
+type = "Solar"
+typology = "OMBRIERE"
+master_activation = true
+construction_start = 2025-05-31
+construction_end = 2026-05-30
+merchant_pre_contract_start = 2026-05-31
+merchant_pre_contract_end = 2026-07-15
+merchant_post_contract_start = 2046-07-16
+merchant_post_contract_end = 2052-01-06
+operation_contract_start = 2026-07-16
+operation_contract_end = 2046-07-15
+installed_capacity = [
+    31.05,
+    "kWc",
+]
+revenues_inflation = "40% IPC"
+capacity_degradation_rate_lenders = 0.004
+capacity_degradation_rate_sponsor = 0.004
+capacity_degradation_start_date = 2026-05-31
+production_availability_lenders = 0.99
+production_availability_sponsor = 0.99
+yield_lenders = "P90"
+yield_sponsor = "P50"
+yield_portofolio_effect = 0.005
+yield_excl_capacity_p50 = 1171.0
+yield_excl_capacity_p90 = 1100.74
+self_consumption = true
+self_consumption_annual_fee = 1.0
+contracted_revenues_ref_tariff = [
+    124.285081042638,
+    "€ / MWh",
+]
+contracted_revenues_bonus_tariff = [
+    7.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_tariff = [
+    42.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_activation = false
+contracted_revenues_yield_threshold_activation = true
+revenues_merchant_price_scenario = "Low non indexed"
+opex = 0
+local_taxes = 0
+contracted_revenues_yield_threshold = 1100
+contracted_revenues_yield_tariff_above_threshold = [
+    40,
+    "€ / MWh",
+]
+
+[[vehicle.SPV_3.assets.Actif_4.OPEX]]
+name = "OPEX €/MWh (period 1)"
+index_xls = 1
+price = [
+    3.0,
+    "€/MWh",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"
+
+[[vehicle.SPV_3.assets.Actif_4.OPEX]]
+name = "OPEX €/MWh (period 2)"
+index_xls = 2
+price = [
+    20.0,
+    "€/MWh",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"
+
+[[vehicle.SPV_3.assets.Actif_4.OPEX]]
+name = "OPEX k€ /Year"
+index_xls = 3
+price = [
+    0.479402111111111,
+    "k€/year",
+]
+"start date" = 2026-05-31
+"end date" = 2052-01-06
+inflation = "IPC"

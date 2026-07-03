@@ -1,0 +1,42 @@
+__pycache__/
+**/data
+.python-version
+**/results
+out
+
+## 
+lib/
+./assets/
+
+
+# too big !
+libs/**
+deb/
+
+# config files
+config_*.toml
+ 
+# images & files
+**.csv
+**.JPG
+**.jpg
+**.PNG
+**.png
+**.env
+**.xz
+**.gz
+**.sqlite
+
+# models (yolo)
+**.pt
+
+# tmp
+.#*
+\#*
+**/*egg-info
+**.~lock**
+
+# config file
+CMakeLists.txt
+
+

@@ -1,0 +1,17 @@
+[theme]
+base = "light"
+
+[global]
+showWarningOnDirectExecution = true
+
+[server]
+headless = true
+port = 8522
+runOnSave = true
+fileWatcherType = "watchdog"
+ 
+[logger]
+level = "warning"
+
+[browser]
+serverAddress = "mca.app.alt-gr.tech"

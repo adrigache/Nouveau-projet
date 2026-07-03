@@ -1,0 +1,164 @@
+[dashboard]
+sensitivity = 2
+scenario = "lender"
+
+[model]
+t_freq = "ME"
+t_start = 2030-01-01
+t_end = 2050-12-30
+inflation_start = 2040-01-01
+
+
+[market]
+ipc_years = [
+2025, 2026, 2027, 2028, 2029, 2030,
+2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040,
+2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050,
+]
+
+ipc_base_rate = [
+0.02, 0.02, 0.02, 0.02, 0.02, 0.02,
+0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02,
+0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02,
+]
+ipc_percentage = [
+    1.0,
+    0.2,
+    0.3,
+    0.4,
+]
+ipc_scenario = [ "IPC", "20% IPC", "30% IPC", "40% IPC",]
+
+
+market_price_years =  [
+2025, 2026, 2027, 2028, 2029,
+2030, 2031, 2032, 2033, 2034,
+2035, 2036, 2037, 2038, 2039,
+2040, 2041, 2042, 2043, 2044,
+2045, 2046, 2047, 2048, 2049, 2050,
+]
+
+
+[market.market_price_scenario]
+"Flat price dashboard" = [
+0.0, 0.0, 0.0, 0.0, 0.0,
+0.0, 0.0, 0.0, 0.0, 0.0,
+0.0, 0.0, 0.0, 0.0, 0.0,
+0.0, 0.0, 0.0, 0.0, 0.0,
+0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+]
+"Low captured" = [
+37.12, 30.49, 26.84, 28.69, 33.53, 
+37.78, 41.94, 42.9 , 44.73, 46.5 ,
+47.56, 53.18, 53.05, 56.67, 60.7 , 
+62.61, 64.01, 61.05, 61.08, 60.63, 
+62.47, 63.87, 65.8 , 66.45, 65.6 , 63.32 
+]
+"Mid captured" = [
+58.24, 45.52, 38.14, 39.1 , 46.97, 
+52.4 , 57.91, 59.07, 61.48, 63.58, 
+63.83, 71.33, 68.93, 71.38, 75.29, 
+74.69, 76.61, 73.47, 72.41, 72.49, 
+72.54, 74.78, 76.12, 76.16, 76.34, 74.1  
+]
+"30 €/MWh" = [
+30 , 30.6 , 31.21, 31.84, 32.47, 
+33.12, 33.78, 34.46, 35.15, 35.85, 
+36.57, 37.3 , 38.05, 38.81, 39.58, 
+40.38, 41.18, 42.01, 42.85, 43.7 , 
+44.58, 45.47, 46.38, 47.31, 48.25, 49.22
+]
+"50 €/MWh" = [
+ 50.0, 50.0, 50.0, 50.0, 50.0,
+ 50.0, 50.0, 50.0, 50.0, 50.0,
+ 50.0, 50.0, 50.0, 50.0, 50.0,
+ 50.0, 50.0, 50.0, 50.0, 50.0,
+ 50.0, 50.0, 50.0, 50.0, 50.0, 50.0
+]
+"Low non indexed" = [
+43.6 , 36.3 , 30.96, 30.16, 32.51, 
+34.83, 37.19, 36.54, 36.3 , 37.67,
+39.14, 41.68, 42.69, 41.94, 41.91, 
+42.1 , 43.3 , 43.76, 43.39, 42.75,
+41.05, 41.06, 40.6 , 39.85, 39.01, 39.54
+]
+"70%Mid/30%Low" = [
+51.9, 41.01, 34.75, 35.98, 42.94,
+48.01, 53.12, 54.22, 56.45, 58.45,
+58.95, 65.89, 64.16, 66.97, 70.91, 
+71.07, 72.83, 69.75, 69.01, 68.93, 
+69.52, 71.51, 73.02, 73.25, 73.12, 70.87
+]
+"80%Mid/20%Low" = [
+54.01, 42.51, 35.88, 37.02, 44.28,
+49.48, 54.72, 55.84, 58.13, 60.16,
+60.58, 67.7 , 65.75, 68.44, 72.37,
+72.27, 74.09, 70.99, 70.14, 70.12,
+70.53, 72.6, 74.05, 74.22, 74.19, 71.95
+]
+
+
+[vehicle.TopCo]
+type = "TopCo"
+
+[vehicle.Holdco_1]
+type = "Holdco"
+parent = "TopCo"
+
+[vehicle.SPV_1]
+type = "SPV"
+parent = "Holdco_1"
+
+[vehicle.SPV_1.assets.Actif_1]
+type = "Solar"
+typology = "BAT"
+master_activation = true
+construction_start = 2031-01-01
+construction_end = 2032-12-31
+operation_contract_start = 2033-02-01
+operation_contract_end = 2048-12-31
+merchant_pre_contract_start = 2033-01-01
+merchant_pre_contract_end = 2033-01-01
+merchant_post_contract_start = 2049-01-01
+merchant_post_contract_end = 2049-01-01
+installed_capacity = [100, "kWc",]
+self_consumption = false
+
+# price
+contracted_revenues_ref_tariff = [
+    115.09592893258,
+    "€ / MWh",
+]
+revenues_merchant_price_scenario = "Mid captured"
+
+# inflation
+revenues_inflation = "20% IPC"
+
+# yield: threshold 
+contracted_revenues_yield_threshold_activation = false
+contracted_revenues_yield_threshold = 1100
+contracted_revenues_yield_tariff_above_threshold = 40
+
+# yield: bonus/malus
+
+contracted_revenues_bonus_tariff = [
+    4.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_tariff = [
+    42.0,
+    "€ / MWh",
+]
+contracted_revenues_malus_activation = false
+
+
+# degradation
+capacity_degradation_rate_lenders = 0
+capacity_degradation_rate_sponsor = 0
+capacity_degradation_start_date = 2035-01-01
+production_availability_lender = 1
+yield_lender = "P90"
+yield_sponsor = "P50"
+yield_portofolio_effect = 0
+yield_excl_capacity_p50 = 1500
+yield_excl_capacity_p90 = 1200

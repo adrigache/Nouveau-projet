@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+requires-python='>=3.9'
+
+[project]
+name="mca_model"
+version="0.1"
+readme="README.md"
+description="MCA - modele de calcul"
+authors=[
+{'name'="Thomas Gerbaud", 'email'='thomas@alt-gr.tech'},
+]
+
+requires-python = ">=3.13"
+
+dependencies=[
+"pipenv",
+"pytest",
+'dotenv',
+"numpy",
+"pandas",
+"streamlit",
+"tomli-w",
+"plotext",
+#"termplotlib",  # require gnuplot
+# "datetype",
+# "streamlit==1.52", # 35
+# "json5",
+# "pyyaml",
+# "scikit-learn",
+"openpyxl",
+"QuantLib",  # specific quantlib
+# "plotly",
+# for tests
+# "vl-convert-python",
+
+# interface cli
+"rich_console @ git+https://gitlab.com/altgr-public/rich_console.git",
+
+#
+# "pytest-ty",
+"pytest-ruff"
+]
+
+classifiers = [
+# How mature is this project? Common values are
+#   3 - Alpha
+#   4 - Beta
+#   5 - Production/Stable
+"Development Status :: 3 - Alpha",
+# "Development Status :: 4 - Beta",
+# "Development Status :: 5 - Production",
+
+# Indicate who your project is intended for
+"Intended Audience :: Developers",
+# Specify the Python versions you support here.
+"Programming Language :: Python :: 3.13",
+]
+
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.ty.rules]
+# unresolved-attribute = "ignore"
+# unresolved-import = "ignore"
+division-by-zero = "error"
+deprecated = "error"
+
+# [tool.pytest.ini_options]
+# addopts = "--mypy --ruff"
+
+# [tool.mypy]
+# python_version = "3.13"
+# warn_return_any = true
+# warn_unused_configs = true
+# ignore_missing_imports = true
+
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+# Dossiers à ignorer
+exclude = [ ".git", ".venv", "__pycache__", "build", "dist", "__init__.py"]
+
+[tool.ruff.lint]
+# select = [
+#     "E",      # Erreurs de style pycodestyle
+#     "F",      # Erreurs Pyflakes (variables non utilisées, etc.)
+#     "I",      # Tri des imports (isort)
+#     "B",      # Bugs potentiels (flake8-bugbear)
+#     "UP",     # Modernisation syntaxe (pyupgrade)
+#     "SIM",    # Simplifications possibles
+# ]
+
+ignore = [
+       "E731",
+       "E501",   # Ligne trop longue (géré par le formatter)
+]
+
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 60
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
