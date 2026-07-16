@@ -1,0 +1,29 @@
+---
+description: Objectif moteur Project Finance Excel→Python (fidélité + générique)
+alwaysApply: true
+---
+
+# MCA Project Finance Engine
+
+## Objectif (ne pas dévier)
+
+- Excel = **golden / extract only**. Runtime = **TOML → moteur**.
+- Fidélité au **centime** (k€) vs `test/assets/golden_results.toml`.
+- Moteur **générique** pour n’importe quel jeu de données.
+- Cas particuliers = **flags TOML** (ex. `cit_include_cash_pooling`, `cit_n_deposits`, `overview_entity`, `senior_schedule_mode`), jamais de logique hardcodée sur un nom de SPV.
+
+## Avant de coder
+
+1. Lire `STATUS.md` (état des phases) et `AGENTS.md` (archi).
+2. Préférer étendre `financing.py` / `balance_sheet/` / extracteurs plutôt que de contourner avec des valeurs Excel en dur dans le runtime.
+3. Ajouter/mettre à jour golden + test de non-régression pour tout écart corrigé.
+
+## Interdits
+
+- Brancher le runtime sur `model_real.xlsx` / openpyxl hors scripts `_extract_*.py`.
+- « Fantasier » des règles Excel non vérifiées (macros, circularités inventées).
+- Committer `.env`, `.venv`, `model_real.xlsx`.
+
+## Phase en cours
+
+Voir `STATUS.md`. En principe **Phase 6 = UI Streamlit** après Phase 5 terminée.

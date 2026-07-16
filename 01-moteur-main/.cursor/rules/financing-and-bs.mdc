@@ -1,0 +1,28 @@
+---
+description: Conventions financement SPV / B/S Holdco
+globs: src/mca_model/model/financing.py,src/mca_model/model/balance_sheet/**/*.py,src/mca_model/model/overview.py,src/mca_model/model/ratios.py,_extract*.py
+alwaysApply: false
+---
+
+# Financement & bilan
+
+## Ordre waterfall SPV (annuel)
+
+1. IS payé (acomptes `cit_n_deposits`) → CFADS (= proceeds BoP + période)
+2. Dividendes (+ offset CP) **avant** SHL
+3. Intérêts / remboursement SHL (min SHL)
+4. Cash pooling
+5. IS dû : NFC = SHL + CP si `cit_include_cash_pooling`
+6. Proceeds EoP = CFADS − sorties equity waterfall
+
+## B/S
+
+- SPV avec actifs : somme composants asset-level (`entries.py`).
+- SPV vide : `hierarchy.empty_spv_nbv` + stocks financement.
+- Holdco : détentions **calculées** (`hierarchy.*`) + postes propres via `holdco_schedules.toml` tant que `senior_schedule_mode=imported`.
+- API véhicule : `balance_sheet/vehicle.py`.
+
+## Extracteurs
+
+- `_extract_real_model.py` : parents r41/r43, tax flags, `da_vehicle_capex` = somme **toutes** colonnes actifs.
+- `_extract_holdco_schedules.py` : régénérer après changement Excel Holdco.
