@@ -1,7 +1,10 @@
 
 from mca_model import Model, Asset
 from mca_model.model import electricity
-from mca_model import opex
+from mca_model.model import opex
+from mca_model.model import taxes
+from mca_model.model import capex as capex_mod
+from mca_model.model import wcr as wcr_mod
 
 # functions for operating_cf
 def cash_proceeds_account_BoP(*args):
@@ -12,11 +15,12 @@ def cash_proceeds_account_BoP(*args):
 
 
 def total_revenues_from_electricity_production(m:Model, a:Asset, **kwargs):
-    """"""
+    """Revenus totaux (contracte + merchant), convertis en k€ (convention Excel / SPV)."""
 
-    return \
-        electricity.contracted.revenues(m, a) +\
+    return (
+        electricity.contracted.revenues(m, a) +
         electricity.merchant.revenues(m, a)
+    ) / 1000.0
 
 
 
@@ -46,24 +50,31 @@ def total_opex(m: Model, a: Asset, **kwargs):
     return opex.get_price(m, a, **kwargs)
 
 
-def agency_fees(*args):
-    """"""
+def agency_fees(m: Model, a: Asset, **kwargs):
+    """
+    Agency fees : facturees au niveau Holdco/Topco (financement), pas au niveau SPV.
+    Sur l'onglet SPV la ligne "Agency fees" (r66) est nulle -> 0 par actif.
+    (A implementer au niveau vehicule en Phase 4 - cascade de dette.)
+    """
     return 0
 
 
 def corporate_income_tax_paid(*args):
-    """"""
+    """(Phase 3 - P&L / IS)"""
     return 0
 
 
-def total_local_taxes(*args):
-    """"""
-    return 0
+def total_local_taxes(m: Model, a: Asset, **kwargs):
+    """CVAE + IFER + Other taxes (replique exacte de l'onglet SPV r387)."""
+    return taxes.total_local_taxes(m, a)
 
 
-def net_flow_of_WCR(*args):
-    """"""
-    return 0
+def net_flow_of_WCR(m: Model, a: Asset, **kwargs):
+    """
+    Variation du BFR (creances clients - dettes fournisseurs).
+    Profil annuel exact (timing) ; total EoP ~ 0 sur la duree de vie.
+    """
+    return wcr_mod.net_flow_of_WCR(m, a)
 
 
 
@@ -71,9 +82,13 @@ def net_flow_of_WCR(*args):
 
 # CFADS
  
-def CAPEX(*args):
-    """"""
-    return 0
+def CAPEX(m: Model, a: Asset, **kwargs):
+    """
+    CAPEX (k€, negatif) : cout de construction reparti sur la periode de construction.
+    Total EoP exact vs Excel ; le calendrier annuel exact depend du plan de decaissement
+    du financement (Phase 4).
+    """
+    return capex_mod.capex(m, a)
 
 
 def development_fees_variable(*args):

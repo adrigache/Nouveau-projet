@@ -1,0 +1,278 @@
+# Valeurs de reference extraites une seule fois de l'Excel (model_real.xlsx).
+# Source: onglets SPV_x, ligne "Total opex", colonne EoP (col 12) = total sur toute la duree.
+# Une fois ces valeurs figees, Excel n'est plus necessaire pour valider le moteur.
+# Convention: OPEX en k€, negatif (sortie de cash).
+
+[opex_total_by_spv]
+SPV_1 = -8429.042748547994
+SPV_2 = -197585.95230128895
+SPV_3 = -129380.3055880453
+SPV_4 = -459.58153108614897
+SPV_5 = -76.43576760094894
+SPV_6 = 0.0
+
+# Decomposition SPV_3 (onglet SPV_3, sous-lignes OPEX, col EoP) - utile pour le debug Phase 1.
+[opex_spv3_breakdown]
+"OPEX €/MWh (period 1)" = -27249.54876996669
+"OPEX k€ /Year" = -100898.09555240383
+"Loyer" = -1232.6612656748143
+
+# --- REVENUS electricite (onglet SPV_x, col EoP) ---
+# total = contracte + merchant. Source: lignes "Total revenues from electricity production",
+# "Contracted period", "Merchant period".
+[revenues_total_by_spv]
+SPV_1 = 110807.597
+SPV_2 = 2598384.466
+SPV_3 = 1233337.710
+SPV_4 = 5347.900
+SPV_5 = 1396.583
+SPV_6 = 0.0
+
+[revenues_contracted_by_spv]
+SPV_1 = 99071.098
+SPV_2 = 2334742.939
+SPV_3 = 1093553.526
+SPV_4 = 4752.842
+SPV_5 = 1235.985
+SPV_6 = 0.0
+
+[revenues_merchant_by_spv]
+SPV_1 = 11736.499
+SPV_2 = 263641.527
+SPV_3 = 139784.184
+SPV_4 = 595.058
+SPV_5 = 160.598
+SPV_6 = 0.0
+
+# --- TAXES LOCALES (onglet SPV_x, ligne "Total local taxes" r68, col EoP) ---
+# total = CVAE (r379) + IFER (r382) + Other taxes (r385). Convention: k€, negatif.
+[local_taxes_total_by_spv]
+SPV_1 = -8669.3246
+SPV_2 = -209644.6192
+SPV_3 = -107349.0204
+SPV_4 = -419.8911
+SPV_5 = -96.4098
+SPV_6 = 0.0
+
+[local_taxes_ifer_by_spv]
+SPV_1 = -4593.0249
+SPV_2 = -110081.1158
+SPV_3 = -56260.1868
+SPV_4 = -195.4605
+SPV_5 = -58.6381
+SPV_6 = 0.0
+
+[local_taxes_other_by_spv]
+SPV_1 = -4029.2897
+SPV_2 = -98398.4025
+SPV_3 = -50596.6154
+SPV_4 = -222.5086
+SPV_5 = -37.1831
+SPV_6 = 0.0
+
+[local_taxes_cvae_by_spv]
+SPV_1 = -47.0100
+SPV_2 = -1165.1008
+SPV_3 = -492.2181
+SPV_4 = -1.9221
+SPV_5 = -0.5885
+SPV_6 = 0.0
+
+# --- P&L / CAPEX (onglet SPV_x, col EoP = total sur toute la duree) ---
+# EBITDA (r139) = revenus + opex + agency + taxes locales. Convention k€.
+[pnl_ebitda_by_spv]
+SPV_1 = 93709.230
+SPV_2 = 2191153.895
+SPV_3 = 996608.384
+SPV_4 = 4468.428
+SPV_5 = 1223.737
+SPV_6 = 0.0
+
+# D&A (r141 <- r429) = -CAPEX total (tout amorti sur la vie). Convention k€, negatif.
+[pnl_da_by_spv]
+SPV_1 = -55653.15
+SPV_2 = -1314193.322
+SPV_3 = -670896.213
+SPV_4 = -2852.58
+SPV_5 = -621.899
+SPV_6 = 0.0
+
+# EBIT (r142) = EBITDA + D&A. Convention k€.
+[pnl_ebit_by_spv]
+SPV_1 = 38056.079
+SPV_2 = 876960.573
+SPV_3 = 325712.171
+SPV_4 = 1615.847
+SPV_5 = 601.838
+SPV_6 = 0.0
+
+# CAPEX total (CF r72 <- financing plan uses). Convention k€, negatif.
+[capex_total_by_spv]
+SPV_1 = -55653.15
+SPV_2 = -1314193.322
+SPV_3 = -670896.213
+SPV_4 = -2852.58
+SPV_5 = -621.899
+SPV_6 = 0.0
+
+# CAPEX / D&A profil annuel SPV_1 (validation du calendrier de decaissement).
+[capex_annual_spv1]
+2025 = -45845.106
+2026 = -9808.044
+
+[pnl_da_annual_spv1]
+2025 = -2256.507
+2026 = -2782.629
+2027 = -2782.629
+2045 = -526.123
+
+# --- FINANCEMENT / P&L bas (Phase 4) ---
+# SHL interests (r148/r512), EBT (r150), CIT due (r152/r343), Net result (r153). Convention k€.
+[pnl_shl_interests_by_spv]
+SPV_1 = -33347.536
+SPV_2 = -935795.716
+SPV_3 = -716687.087
+SPV_4 = -2401.095
+SPV_5 = -296.411
+SPV_6 = 0.0
+
+[pnl_ebt_by_spv]
+SPV_1 = 4708.543
+SPV_2 = -58835.143
+SPV_3 = -390974.916
+SPV_4 = -785.248
+SPV_5 = 312.638
+SPV_6 = 0.0
+
+[pnl_cit_due_by_spv]
+SPV_1 = -4228.820
+SPV_2 = -159330.700
+SPV_3 = -54344.846
+SPV_4 = 0.0
+SPV_5 = -79.129
+SPV_6 = -1.084
+
+[pnl_net_result_by_spv]
+SPV_1 = 479.723
+SPV_2 = -218165.843
+SPV_3 = -445319.762
+SPV_4 = -785.248
+SPV_5 = 233.509
+SPV_6 = -1.084
+
+# Cash pooling interests (P&L, positif = produit). Quasi-nul sauf SPV_5.
+[pnl_cash_pooling_interests_by_spv]
+SPV_1 = 0.0
+SPV_2 = 0.0
+SPV_3 = 0.0
+SPV_4 = 0.0
+SPV_5 = 7.206
+SPV_6 = 0.0
+
+# --- Bilan (stocks fin 2026, k€) — Phase 5 ---
+[bs_spv1_2026]
+total_assets = 50894.714837
+total_liabilities = 50894.714837
+nbv_assets = 50614.014198
+shl = 57150.050000
+retained_earnings = -6271.693718
+share_capital = 1.0
+trade_receivables = 280.700639
+trade_payables = 15.358555
+
+[bs_spv2_2026]
+total_assets = 1210013.284074
+total_liabilities = 1210013.284074
+nbv_assets = 1203906.679662
+shl = 1347339.927013
+retained_earnings = -137663.083136
+share_capital = 1.0
+trade_receivables = 6106.604412
+trade_payables = 335.440197
+
+[bs_spv3_2026]
+total_assets = 623189.208462
+total_liabilities = 623189.208462
+nbv_assets = 622038.363398
+shl = 701344.597447
+retained_earnings = -78221.980272
+share_capital = 1.0
+trade_receivables = 1150.845064
+trade_payables = 65.591287
+
+[bs_spv4_2026]
+total_assets = 2633.550718
+total_liabilities = 2633.550718
+nbv_assets = 2631.711517
+shl = 3030.412599
+retained_earnings = -397.979660
+share_capital = 1.0
+trade_receivables = 1.839201
+trade_payables = 0.117780
+
+[bs_spv5_2026]
+total_assets = 600.073218
+total_liabilities = 600.073218
+nbv_assets = 596.304560
+shl = 616.306772
+retained_earnings = -17.390378
+share_capital = 1.0
+trade_receivables = 3.768659
+trade_payables = 0.156823
+
+[bs_spv6_2026]
+total_assets = 2.168036
+total_liabilities = 2.168036
+nbv_assets = 4.332649
+proceeds = -2.164613
+shl = 0.0
+retained_earnings = 3.249487
+share_capital = 0.0
+trade_receivables = 0.0
+trade_payables = 0.0
+cit_payable = -1.081451
+
+# Detentions Holdco YE2026 (Excel r159/r160/r174) — agrégation SPV enfants
+[bs_holdco1_detention_2026]
+share_capital_in_detention = 2.0
+shl_in_spvs = 1404489.977012
+cash_pooling_in_detention = 0.0
+
+[bs_holdco2_detention_2026]
+share_capital_in_detention = 3.0
+shl_in_spvs = 704991.316818
+cash_pooling_in_detention = 0.0
+
+# Holdco B/S YE2026 (detentions calculees + postes propres schedules)
+[bs_holdco1_2026]
+total_assets = 1464110.068107
+total_liabilities = 1464110.068107
+nbv_assets = 13834.316524
+sc_detention = 2.0
+shl_in_spvs = 1404489.977012
+proceeds = 45667.884600
+senior = 1250336.465593
+ebl = 178601.735101
+retained_earnings = 34337.886500
+
+[bs_holdco2_2026]
+total_assets = 720937.778755
+total_liabilities = 720937.778755
+nbv_assets = 6759.868128
+sc_detention = 3.0
+shl_in_spvs = 704991.316818
+proceeds = 4221.852029
+senior = 547470.792190
+ebl = 152343.868541
+retained_earnings = 16817.118520
+
+# Overview (entite Holdco_1) — Check B/S YE2026
+[overview_holdco1_2026]
+entity = "Holdco_1"
+total_assets = 1464110.068107
+total_liabilities = 1464110.068107
+check_bs = 0.0
+
+# Ratios Holdco_2 YE2027 (Overview HDSCR cible 1.15 ; moteur ~1.15 sans fees engagement)
+[ratios_holdco2_2027]
+hdscr = 1.15

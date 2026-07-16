@@ -3,6 +3,9 @@ __pycache__/
 .python-version
 **/results
 out
+.venv/
+.pytest_cache/
+.streamlit/
 
 ## 
 lib/
@@ -12,6 +15,7 @@ lib/
 # too big !
 libs/**
 deb/
+model_real.xlsx
 
 # config files
 config_*.toml
@@ -23,6 +27,7 @@ config_*.toml
 **.PNG
 **.png
 **.env
+.env
 **.xz
 **.gz
 **.sqlite
@@ -35,6 +40,10 @@ config_*.toml
 \#*
 **/*egg-info
 **.~lock**
+_*_out.txt
+_inspect_*.txt
+_shl*.txt
+_p5_*.txt
 
 # config file
 CMakeLists.txt

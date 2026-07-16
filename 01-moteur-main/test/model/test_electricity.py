@@ -255,24 +255,29 @@ def test_f_price_contracted_FiT(model):
     assert(found[found.index.year==2008].sum()==5*42*50)
 
 
-    # get price - with threshold
+    # get price - with yield threshold (mecanisme Excel: MIN(yield,seuil)/yield)
+    # yield = 1000 h, seuil = 550 h  ->  55% de la production au tarif 1, 45% au tarif 2
+    # prix effectif (constant) = 1*550/1000 + 2*450/1000 = 1.45 €/MWh
     a = Node({
         'contracted_revenues_ref_tariff': (1, '€ / MWh'),
         'contracted_revenues_yield_threshold_activation': True,
         'contracted_revenues_yield_threshold': 550,
-        'contracted_revenues_yield_tariff_above_threshold': (2, '€ / MWh')
+        'contracted_revenues_yield_tariff_above_threshold': (2, '€ / MWh'),
+        'yield_lender': 'P90',
+        'yield_excl_capacity_p90': 1000,
+        'yield_portofolio_effect': 0.0,
+        'production_availability_lender': 1.0,
         })
 
-
-    # 179 jours sous le seuil 
     found = contracted.f_price_FiT(cast(Model,m), cast(Asset,a), prod)
 
-    f = lambda x:found[found.index.year==x].sum()
-    assert(f(2000)==0)
-    assert(pytest.approx(f(2001), rel=1e-6)==(500*1+500*2+ 100*(15/31+2*16/31)))
-    assert(pytest.approx(f(2002), rel=1e-6)==(500*1+600*2+ 150))
-    assert(pytest.approx(f(2008), rel=1e-6)==(250*1))
-    assert(f(2010)==0)
+    eff = 1 * 550 / 1000 + 2 * 450 / 1000
+    assert pytest.approx(eff, abs=1e-9) == 1.45
+    # le prix effectif est applique a la production, periode par periode
+    assert pytest.approx((found - prod * eff).abs().max(), abs=1e-9) == 0
+    f = lambda x: found[found.index.year == x].sum()
+    assert f(2000) == 0
+    assert pytest.approx(f(2001), rel=1e-9) == prod[prod.index.year == 2001].sum() * eff
 
 
 
@@ -329,35 +334,41 @@ def test_contracted_revenues(model):
     # compute
     found = contracted.revenues(cast(Model,m),  cast(Asset,a))
 
+    # hors periode de contrat : aucun revenu
     before_operation = found[found.index<pd.to_datetime(t0)]
     assert(before_operation.max()==0)
-    
+
     after_operation = found[found.index>pd.to_datetime(t1)+THIRTY_DAYS]
     assert(after_operation.max()==0)
 
-
+    # premier mois partiel (fev 2001, contrat demarre le 3) < mois plein suivant
     operation = found.truncate(before=pd.to_datetime(t0), after=pd.to_datetime(t1))
+    first_month = operation[pd.Timestamp(t0):pd.Timestamp(2001,3,1)].iloc[0]
+    second_month = operation[pd.Timestamp(2001,3,1):pd.Timestamp(2001,4,1)].iloc[0]
+    assert(first_month < second_month)
 
-    first_month = operation[t0:dt.date(2001,3,1)].iloc[0]
-    second_month = operation[dt.date(2001,3,1):dt.date(2001,4,1)].iloc[0]
-    last_full_month = operation[operation.index.year==2008].iloc[3]
-    assert(first_month<second_month)  # first month is incomplete
-    
-    assert(pytest.approx(last_full_month, rel=1e-4) == second_month) # no inflation or degradation
+    # SOURCE DE VERITE = total ANNUEL exact (comme l'Excel). Annee pleine 2002,
+    # sans inflation ni degradation : cap(kW) * rendement(h) * dispo * (ref+bonus) * 1e-3
+    target_annual = 100 * 1300 * 1 * (42 + 10) * 1e-3
+    got_2002 = found[found.index.year == 2002].sum()
+    assert(pytest.approx(got_2002, rel=1e-9) == target_annual)
 
-    factor = 1e-3 # prod en kW, prix en euro/MWh
-    target = (100*1300/12)*(42+10)*factor
-    assert(pytest.approx(second_month, rel=1e-2) == target)
+    # la production annuelle (MWh) doit egaler la replique exacte
+    prod_annual = contracted.annual_production_MWh(cast(Model, m), cast(Asset, a))
+    assert(pytest.approx(prod_annual[2002], rel=1e-9) == 100 * 1300 * 1 * 1e-3)
 
-    
     # compute - add inflation
     m.ipc_base_rate = [ 0.01 for i,x in enumerate(t) ]
     a.contracted_revenues_bonus_tariff = (0, '€ / MWh')
 
     found = contracted.revenues(cast(Model,m),  cast(Asset,a))
 
-    second_month = found[found.index.year==2001].iloc[2]
-    last_full_month = found[found.index.year==2008].iloc[3]
-
-    assert( pytest.approx(last_full_month/second_month, rel=1e-3) == 1.01**7)
+    # l'inflation s'applique EXACTEMENT au ratio des totaux annuels (prod constante,
+    # pas de degradation) : rev(y)/rev(y') = index_inflation(y)/index_inflation(y')
+    r2002 = found[found.index.year == 2002].sum()
+    r2003 = found[found.index.year == 2003].sum()
+    i2002 = contracted._fit_inflation_year(cast(Model, m), cast(Asset, a), 2002)
+    i2003 = contracted._fit_inflation_year(cast(Model, m), cast(Asset, a), 2003)
+    assert(r2003 > r2002)
+    assert(pytest.approx(r2003 / r2002, rel=1e-9) == i2003 / i2002)
 

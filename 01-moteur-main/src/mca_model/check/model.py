@@ -62,9 +62,11 @@ def check_assets(m:Model):
             assert(a.construction_end <= a.operation_contract_start)
             assert(a.operation_contract_start <= a.operation_contract_end)
             assert(a.merchant_pre_contract_start <= a.operation_contract_start)
-            assert(a.merchant_pre_contract_start <= a.merchant_pre_contract_end)
             assert(a.operation_contract_end <=  a.merchant_post_contract_start)
-            assert(a.merchant_post_contract_start <= a.merchant_post_contract_end)
+            # NB: les fenetres merchant pre/post peuvent etre DESACTIVEES dans les
+            # donnees reelles (fin = debut - 1 jour => fenetre vide, aucune production
+            # merchant sur la periode). On n'impose donc pas debut <= fin ici ;
+            # le moteur produit naturellement 0 sur une fenetre vide (cf. day-count).
 
 
     

@@ -77,6 +77,91 @@ def f_production_availability(m:Model, a:Asset) -> float:
     """"portofolio 2555-> ... (sensibility)"""
 
     return utils.get_param(a, 'production_availability', m.scenario)
+
+
+# ---------------------------------------------------------------------------
+# Replication ANNUELLE exacte de la production (onglet Portfolio)
+# Partagee par contracted (r2555) et merchant (r3058) : memes facteurs,
+# seules les fenetres de jours changent.
+# ---------------------------------------------------------------------------
+
+def is_leap_year(y:int) -> bool:
+    return (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0)
+
+
+def days_in_year(y:int) -> int:
+    return 366 if is_leap_year(y) else 365
+
+
+def yearfrac_actact(a:dt.date, b:dt.date) -> float:
+    """Reproduit Excel YEARFRAC(a, b, base=1) (actual/actual)."""
+    if a == b:
+        return 0.0
+    if a > b:
+        a, b = b, a
+    if a.year == b.year:
+        return (b - a).days / days_in_year(a.year)
+    years = b.year - a.year + 1
+    span = (dt.date(b.year + 1, 1, 1) - dt.date(a.year, 1, 1)).days
+    return (b - a).days / (span / years)
+
+
+def days_in_window_year(y:int, start:dt.date, end:dt.date) -> int:
+    """Jours d'une fenetre [start, end] dans l'annee civile y, bornes INCLUSES (Excel +1)."""
+    ys, ye = dt.date(y, 1, 1), dt.date(y, 12, 31)
+    lo, hi = max(ys, start), min(ye, end)
+    if lo > hi:
+        return 0
+    return (hi - lo).days + 1
+
+
+def yield_annual_FLH(m:Model, a:Asset) -> float:
+    """Rendement annuel en heures (M78 Excel), effet portefeuille inclus si P90."""
+    key = utils.get_param(a, 'yield', m.scenario).lower()
+    value = getattr(a, f'yield_excl_capacity_{key}')
+    if key == 'p90':
+        return value * (1 + a.yield_portofolio_effect)
+    if key == 'p50':
+        return value
+    raise Exception(f"{key} should be 'p50' or 'p90'")
+
+
+def _active_windows(windows:list[tuple[dt.date, dt.date]]) -> list[tuple[dt.date, dt.date]]:
+    return [(s, e) for (s, e) in windows if s <= e]
+
+
+def annual_production_MWh(m:Model, a:Asset, windows:list[tuple[dt.date, dt.date]]) -> dict[int, float]:
+    """
+    Production annuelle (MWh) repliquant l'Excel (Portfolio r2555/r3058):
+        prod(y) = jours(y) * capacite * rendement * degradation(y) * dispo * 1e-3
+    `windows` = liste de fenetres actives (contrat pour contracted ; pre+post pour merchant).
+    """
+    active = _active_windows(windows)
+    if not active or not a.master_activation:
+        return {}
+
+    cap = f_installed_capacity(m, a)
+    yld = yield_annual_FLH(m, a)
+    avail = f_production_availability(m, a)
+    rate_deg = utils.get_param(a, 'capacity_degradation_rate', m.scenario)
+    deg_start = a.capacity_degradation_start_date
+
+    y0 = min(s.year for s, _ in active)
+    y1 = max(e.year for _, e in active)
+
+    out, prev_deg = {}, 1.0
+    for y in range(y0, y1 + 1):
+        ys, ye = dt.date(y, 1, 1), dt.date(y, 12, 31)
+        if deg_start > ye:
+            deg = prev_deg
+        else:
+            f_start = 0.0 if (deg_start >= ys and ye >= deg_start) else yearfrac_actact(deg_start, ys)
+            f_end = yearfrac_actact(deg_start, ye)
+            deg = (1 - rate_deg) ** ((f_start + f_end) / 2)
+        prev_deg = deg
+        days = sum(days_in_window_year(y, s, e) for (s, e) in active)
+        out[y] = (days / days_in_year(y)) * cap * yld * deg * avail * 1e-3
+    return out
      
 
      

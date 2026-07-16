@@ -73,13 +73,14 @@ def days_in_range_per_month(month_index: pd.DatetimeIndex, t_start:dt.date, t_en
 
     rc.debug(f'days_in_range_per_month: months range from {month_index[0]:%m/%Y} to {month_index[-1]:%m/%Y}, range: {t_start:%Y-%m-%d} to {t_end:%Y-%m-%d}', debug=debug)
 
-    assert(t_start <= t_end)
-    # assert( (t_end-t_start).days>=27)
-
     if isinstance(t_start, dt.datetime):
         t_start = t_start.date()
     if isinstance(t_end, dt.datetime):
         t_end = t_end.date()
+
+    # fenetre vide (ex: phase merchant desactivee, fin = debut - 1 jour) => 0 partout
+    if t_start > t_end:
+        return pd.Series(0.0, index=month_index)
 
     out = []
     for m in month_index:

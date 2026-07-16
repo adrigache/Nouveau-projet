@@ -26,8 +26,10 @@ def test_revenues_contracted_no_degradation():
     # test production with no degradation
     in_prod = found[a.operation_contract_start:next_month(a.operation_contract_end)]
 
+    # L'inflation FiT demarre a l'anniversaire du COD (formule Excel r2049), donc l'annee
+    # du COD est NON indexee : le mois le plus faible (aucune degradation ici) = estimation.
     target = a.estimated_revenues_from_electricity_contracted
-    assert(pytest.approx(in_prod.median(), rel=.01)== target)  # 1% !
+    assert(pytest.approx(in_prod.min(), rel=.01)== target)  # 1% !
 
 
 
@@ -53,6 +55,7 @@ def test_revenues_contracted_with_degradation():
 
     # degradation starts on first month (end of month)
     # target = a.installed_capacity[0]*a.yield_excl_capacity_p90/12*1e-3
+    # annee du COD non indexee (inflation FiT a l'anniversaire du COD) : le min = estimation
     target = a.estimated_revenues_from_electricity_contracted
     not_degraded = found[a.operation_contract_start:a.capacity_degradation_start_date]
     assert( pytest.approx(not_degraded.min(), rel=.1)==target)  # 10%
@@ -61,7 +64,8 @@ def test_revenues_contracted_with_degradation():
     n = 12*(48-35+1) # 2035/01 -> 2048/12 (start on 01 Jan)
     assert(n == degraded.index.size)
     assert(degraded.index[-1].date() == a.operation_contract_end)
-    assert(degraded.median() < 1.01*target)
+    # revenu indexe sur l'inflation (croissante) mais faible degradation : reste proche
+    assert(target <= degraded.median() < 1.10*target)
 
 
     rm = (1-a.capacity_degradation_rate_lender)**(1/12)  # monthly degradation
